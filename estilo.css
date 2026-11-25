@@ -1,0 +1,292 @@
+/* =====================================================================
+   WOREVI · apple
+   Passo 1: fundo branco, letras pretas, tudo centrado, só texto.
+
+   A letra é o SF Pro do computador do Gui — a versão variável, com os
+   dois eixos: o peso (wght) e o tamanho ótico (opsz), que é o que faz
+   a Apple ter o "Display" nos títulos e o "Text" no corpo sem trocar
+   de ficheiro. O browser escolhe o opsz sozinho pelo tamanho da letra.
+   Ficheiro reduzido ao latim (o português inteiro) para não pesar.
+   ===================================================================== */
+
+@font-face{
+  font-family:"SF Pro";
+  src:url("fontes/sf-pro.woff") format("woff");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"SF Pro";
+  src:url("fontes/sf-pro-italic.woff") format("woff");
+  font-weight:100 900;
+  font-style:italic;
+  font-display:swap;
+}
+
+:root{
+  --branco:#fff;
+  --preto:#1d1d1f;          /* o preto da Apple não é #000: é este */
+  --cinza:#6e6e73;          /* o cinzento dos subtítulos deles */
+  --fio:#d2d2d7;
+  --letra:"SF Pro",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+html{font-optical-sizing:auto}
+
+body{
+  margin:0;
+  min-height:100svh;
+  background:var(--branco);
+  color:var(--preto);
+  font-family:var(--letra);
+  font-size:17px;
+  line-height:1.47;
+  letter-spacing:-.022em;    /* a Apple aperta sempre um bocadinho */
+  -webkit-font-smoothing:antialiased;
+  text-align:center;
+  display:flex; flex-direction:column;
+}
+
+a{color:inherit; text-decoration:none}
+::selection{background:#0071e3; color:#fff}
+:focus-visible{outline:2px solid #0071e3; outline-offset:4px; border-radius:4px}
+
+/* ---------------------------------------------------------------
+   o topo: só a marca, centrada
+   --------------------------------------------------------------- */
+
+.topo{padding:26px 16px 0}
+.marca{display:inline-block; color:var(--preto); line-height:0}
+.marca svg{display:block; width:92px; height:auto}
+
+/* ---------------------------------------------------------------
+   o ecrã: uma frase, uma linha por baixo, os caminhos
+   --------------------------------------------------------------- */
+
+.ecra{
+  flex:1;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:40px 16px 80px;
+}
+
+/* As quatro palavras são a página inteira, por isso sobem de tamanho:
+   são o título. Peso médio, apertadas como a Apple faz. */
+.caminhos{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:12px clamp(28px,5vw,64px);
+  font-size:clamp(26px,3.4vw,40px);
+  font-weight:500;
+  letter-spacing:-.025em;
+}
+/* A onda de peso.
+   Cada letra é um span com o seu índice (--i). Ao passar o rato, todas
+   vão a 800, mas cada uma começa um bocadinho depois da anterior: é
+   isso que faz a onda. Ao sair, o mesmo caminho ao contrário. */
+.palavra{
+  display:inline-block; text-align:center;
+  white-space:nowrap;        /* as letras são blocos: nunca partir */
+  padding:4px 0;
+  font-variation-settings:"wght" 500;
+  transition:color .35s ease;
+}
+.palavra .l{
+  display:inline-block;
+  font-variation-settings:"wght" 500;
+  transition:font-variation-settings .32s cubic-bezier(.22,1,.36,1),
+             transform .32s cubic-bezier(.22,1,.36,1);
+  transition-delay:calc(var(--i) * 30ms);
+}
+.palavra:hover .l,
+.palavra:focus-visible .l{
+  font-variation-settings:"wght" 800;
+  transform:translateY(-1px);
+}
+/* ao sair, a onda recua: a última letra é a primeira a largar */
+.palavra:not(:hover) .l{
+  transition-delay:calc((var(--n) - 1 - var(--i)) * 22ms);
+}
+
+/* As quatro palavras do início têm cada uma a sua cor viva — as cores
+   de sistema da Apple — e ao passar o rato vão do preto para a cor,
+   com um brilho na mesma cor por trás. Ideia do Gui. */
+.caminhos a:nth-child(1){--cor:#0a84ff; --brilho:rgba(10,132,255,.55)}   /* azul */
+.caminhos a:nth-child(2){--cor:#ff375f; --brilho:rgba(255,55,95,.5)}     /* rosa */
+.caminhos a:nth-child(3){--cor:#30d158; --brilho:rgba(48,209,88,.5)}     /* verde */
+.caminhos a:nth-child(4){--cor:#ff9f0a; --brilho:rgba(255,159,10,.55)}   /* laranja */
+.caminhos a{
+  transition:color .35s ease, text-shadow .45s ease;
+  text-shadow:0 0 0 rgba(0,0,0,0);
+}
+.caminhos a:hover,.caminhos a:focus-visible{
+  color:var(--cor);
+  text-shadow:0 0 18px var(--brilho), 0 0 42px var(--brilho);
+}
+
+/* as outras três esbatem, para a que está debaixo do rato ficar só */
+.caminhos:hover .palavra:not(:hover),
+.lista:hover .palavra:not(:hover){color:var(--cinza)}
+
+/* o estado usado só para medir a largura no peso máximo */
+.palavra.medir .l{
+  font-variation-settings:"wght" 800;
+  transition:none;
+}
+
+/* ---------------------------------------------------------------
+   as páginas-destino e a água
+   --------------------------------------------------------------- */
+
+.pagina{
+  flex:1;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:28px;
+  padding:40px 16px 80px;
+}
+/* o display:flex ganharia ao atributo hidden; isto repõe a ordem */
+.pagina[hidden],.ecra[hidden]{display:none}
+.pagina h1{
+  margin:0;
+  font-size:clamp(40px,7vw,88px);
+  font-weight:600; line-height:1.05; letter-spacing:-.03em;
+}
+.voltar{
+  font-size:19px; color:var(--cinza);
+  transition:color .3s ease;
+}
+.voltar:hover{color:var(--preto)}
+
+/* ---------------------------------------------------------------
+   AS PÁGINAS E A TROCA
+
+   Nenhuma página repete a palavra em que se carregou: o conteúdo é
+   a própria lista, no mesmo tamanho e no mesmo sítio das quatro
+   palavras. E a troca é a mais limpa que há: o que sai esvai-se a
+   subir um nada; o que entra assenta linha a linha, de baixo para
+   cima, com 45 ms entre linhas. Só opacity e transform.
+   --------------------------------------------------------------- */
+
+:root{--suave:cubic-bezier(.2,.7,.2,1)}
+
+/* o ecrã inicial e as páginas são camadas a ocupar o ecrã, por baixo
+   do logo: nada muda de sítio quando uma se esvai */
+/* Centrado no espaço que sobra ABAIXO do logo, não na janela inteira.
+   Centrar na janela inteira dá o centro geométrico, mas o logo ocupa o
+   topo, e o olho centra no que resta: as palavras pareciam altas (era
+   isto que o Gui sentia — "muito para cima"). Com o padding de cima
+   igual à altura do logo e zero em baixo, o centro cai no meio do que
+   está livre. */
+.ecra,.pagina{position:fixed; inset:0; padding:60px 16px 0}  /* 60 = fundo do logo */
+.topo{position:relative; z-index:10}
+
+/* a seta de voltar: um chevron fino por baixo da lista, onde estava
+   o Voltar. Está pendurada na lista (position:absolute) e não no
+   fluxo, por isso não conta para o centro — a lista fica exatamente
+   onde estavam as quatro palavras. */
+/* o .miolo embrulha a lista e a seta: é a ele que a seta se pendura
+   (uma ul só pode ter li lá dentro, por isso não pode ser a lista) */
+.pagina .miolo{position:relative}
+.pagina .voltar{
+  position:absolute; top:100%; left:50%;
+  margin:34px 0 0; transform:translateX(-50%);
+  display:grid; place-items:center;
+  width:40px; height:40px; border-radius:50%;
+  color:var(--preto);
+  transition:background-color .25s ease, transform .3s var(--suave);
+}
+.pagina .voltar:hover{background:#f5f5f7; transform:translateX(-50%) translateX(-2px)}
+/* a seta não desliza: aparece, e mais nada */
+.aEntrar .voltar{opacity:0; transform:translateX(-50%)}
+.aEntrar.cá .voltar{opacity:1; transform:translateX(-50%); transition:opacity .5s ease}
+.pagina .voltar:hover{transform:translateX(-50%)}
+
+/* ---------------------------------------------------------------
+   OS PERFIS — a fotografia quadrada a flutuar, a ficha ao lado
+   --------------------------------------------------------------- */
+
+.ficha{
+  display:flex; align-items:center; gap:clamp(28px,4vw,56px);
+  text-align:left;
+}
+/* A flutuação vai no embrulho e a inclinação na foto: são dois
+   transforms diferentes e não podem viver no mesmo elemento. */
+.flutua{
+  position:relative; flex:none;
+  width:clamp(180px,22vw,260px); aspect-ratio:1;
+  animation:flutuar 6s ease-in-out infinite;
+  perspective:900px;
+}
+.ficha-foto{
+  display:block; width:100%; height:100%;
+  border-radius:28px; object-fit:cover;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.28), 0 12px 24px -12px rgba(0,0,0,.14);
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);
+  transition:transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .6s ease;
+  will-change:transform;
+}
+/* (havia aqui uma luz a andar por cima da foto; o Gui achou que não
+   fazia falta, e saiu — fica só a inclinação e a sombra a crescer) */
+.flutua.aInclinar .ficha-foto{
+  transition:transform .12s ease-out, box-shadow .6s ease;
+  box-shadow:0 40px 80px -24px rgba(0,0,0,.34), 0 16px 30px -14px rgba(0,0,0,.18);
+}
+@keyframes flutuar{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.ficha-texto{max-width:34ch}
+.ficha-texto h2{
+  margin:0; font-size:clamp(26px,3vw,36px);
+  font-weight:600; letter-spacing:-.025em; line-height:1.15;
+}
+.ficha-texto .papel{margin:4px 0 14px; color:var(--cinza); font-size:17px}
+.ficha-texto p{margin:0; font-size:17px; line-height:1.5; color:var(--preto)}
+
+@media (max-width:640px){
+  .ficha{flex-direction:column; text-align:center; gap:22px}
+  .ficha-texto{max-width:30ch}
+}
+
+.lista{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; align-items:center;
+  gap:6px;
+  font-size:clamp(26px,3.4vw,40px);
+  font-weight:500; letter-spacing:-.025em; line-height:1.3;
+}
+.lista a{transition:color .3s ease}
+.lista a:hover{color:var(--preto)}
+
+/* o que entra: cada linha vem de 14px abaixo, uma a seguir à outra */
+.aEntrar .lista li,.aEntrar .ficha > *,.aEntrar .caminhos a{
+  opacity:0; transform:translateY(14px);
+}
+.aEntrar.cá .lista li,.aEntrar.cá .ficha > *,.aEntrar.cá .caminhos a{
+  opacity:1; transform:none;
+  transition:opacity .55s var(--suave), transform .65s var(--suave);
+  transition-delay:calc(var(--k, 0) * 45ms + .12s);
+}
+/* o que sai: esvai-se todo de uma vez, a subir um nada */
+.aSair{
+  opacity:0; transform:translateY(-8px);
+  transition:opacity .3s ease, transform .3s ease;
+  pointer-events:none;
+}
+
+body.aViajar{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){
+  .aEntrar .lista li,.aEntrar .voltar,.aEntrar .caminhos a,.aSair{
+    transition:none; transform:none; opacity:1;
+  }
+  .aSair{opacity:0}  .palavra .l{transition:none}
+  .caminhos a:hover .l{font-variation-settings:"wght" 500; transform:none}
+  .caminhos a:hover{text-decoration:underline; text-underline-offset:6px}
+}
+
+@media (max-width:560px){
+  .caminhos{gap:8px 22px; font-size:17px}
+}
