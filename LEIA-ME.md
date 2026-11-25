@@ -126,6 +126,36 @@ vai dentro de cada uma decide-se a seguir.
 
 Os seguintes decidem-se um a um.
 
+## O perfil virou currículo
+
+Pedido do Gui: a página de cada pessoa deixa de ser só a fichazinha e
+passa a portefólio a sério. Cada perfil ganhou:
+
+- **Especialidades** — quatro etiquetas (pílulas cinzentas) com o que
+  a pessoa faz. Provisórias, inventadas a partir do papel de cada um.
+- **Trabalhos** — uma grelha de três fotos quadradas, cortadas de
+  `13-worevi/media` e guardadas em `media/portfolio/<pessoa>-N.webp`.
+  A atribuição de cada trabalho à pessoa certa é um palpite meu (o
+  Samuel levou fotos de drone, o Arthur retratos e interiores, por
+  aí) — **o Gui tem de confirmar se é mesmo quem fez cada um**.
+
+Como isto já não cabe sempre num ecrã, **só a página de perfil
+desliza** (`overflow-y:auto`) — as outras (Trabalhos, Serviços, Equipa,
+Contacto, o início) continuam de propósito presas a um ecrã só. A seta
+de voltar saiu do fluxo do conteúdo e ficou fixa no canto superior
+esquerdo, como o "<" das Definições no iOS: visível mesmo a meio do
+scroll. Nas outras páginas continua pendurada por baixo da lista, como
+estava.
+
+**Um bug apanhado a meio:** a regra que faz a página de perfil deslizar
+(`.pagina.perfil{display:block}`) tinha a mesma força (duas classes)
+que a regra que esconde páginas escondidas (`.pagina[hidden]
+{display:none}`), e por vir depois no ficheiro ganhava — os oito
+perfis ficavam todos a mostrar-se ao mesmo tempo, sobrepostos uns aos
+outros. Via-se texto e fotos de pessoas diferentes misturados. Corrigido
+com `.pagina.perfil[hidden]{display:none}`, que tem mais uma classe na
+conta e garante que esconder continua a esconder.
+
 ## O logo e o cursor
 
 O logo deixou de ser um link: era `<a href="#">`, por isso um clique

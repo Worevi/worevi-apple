@@ -283,6 +283,67 @@ a{color:inherit; text-decoration:none}
   .ficha-texto{max-width:30ch}
 }
 
+/* ---------------------------------------------------------------
+   O PERFIL VIRA CURRÍCULO
+   Pedido do Gui: a página de cada pessoa passa a ser um portefólio
+   a sério — especialidades e uma grelha de trabalhos, não só a
+   fichazinha. Isso já não cabe num ecrã só, por isso esta página (e
+   só esta) desliza; as outras continuam de ecrã único, de propósito.
+
+   A seta de voltar sai do fluxo e fica fixa no canto, como o "<"
+   do Definições no iOS: sempre à vista, mesmo a meio do scroll —
+   nas outras páginas ela continua pendurada por baixo da lista.
+   --------------------------------------------------------------- */
+
+.pagina.perfil{
+  display:block; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:92px 20px 110px;
+}
+/* BUG que já apanhou: `.pagina.perfil{display:block}` tem a mesma
+   especificidade que `.pagina[hidden]{display:none}` (duas classes),
+   e por vir depois no ficheiro ganhava — os oito perfis escondidos
+   ficavam a mostrar-se todos ao mesmo tempo, sobrepostos. Esta regra,
+   com mais uma classe na conta, garante que esconder continua a
+   esconder. */
+.pagina.perfil[hidden]{display:none}
+.perfil .miolo.cv{
+  max-width:640px; margin:0 auto;
+  display:flex; flex-direction:column; gap:clamp(40px,6vh,64px);
+}
+.perfil .ficha{margin:0}
+
+.pagina.perfil > .voltar{
+  position:fixed; top:22px; left:20px; z-index:11;
+  margin:0; transform:none;
+}
+.pagina.perfil > .voltar:hover{transform:translateX(-2px)}
+/* a entrada desta seta é só opacidade, como as outras — sem o
+   translateX(-50%) que as outras páginas usam para se centrarem */
+.aEntrar.perfil > .voltar{opacity:0; transform:none}
+.aEntrar.perfil.cá > .voltar{opacity:1; transform:none}
+
+.cv-bloco{text-align:left}
+.cv-titulo{
+  margin:0 0 16px;
+  font-size:13px; font-weight:600; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--cinza);
+}
+
+.tags{display:flex; flex-wrap:wrap; gap:10px}
+.tag{
+  padding:9px 18px; border-radius:999px;
+  background:#f5f5f7; color:var(--preto);
+  font-size:15px; font-weight:500; letter-spacing:-.01em;
+}
+
+.obras{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,2vw,16px)}
+.obra{margin:0; border-radius:18px; overflow:hidden; aspect-ratio:1}
+.obra img{width:100%; height:100%; object-fit:cover; display:block}
+
+@media (max-width:560px){
+  .obras{grid-template-columns:repeat(2,1fr)}
+}
+
 .lista{
   list-style:none; margin:0; padding:0;
   display:flex; flex-direction:column; align-items:center;
@@ -294,10 +355,10 @@ a{color:inherit; text-decoration:none}
 .lista a:hover{color:var(--preto)}
 
 /* o que entra: cada linha vem de 14px abaixo, uma a seguir à outra */
-.aEntrar .lista li,.aEntrar .ficha > *,.aEntrar .caminhos a{
+.aEntrar .lista li,.aEntrar .ficha > *,.aEntrar .cv-bloco,.aEntrar .caminhos a{
   opacity:0; transform:translateY(14px);
 }
-.aEntrar.cá .lista li,.aEntrar.cá .ficha > *,.aEntrar.cá .caminhos a{
+.aEntrar.cá .lista li,.aEntrar.cá .ficha > *,.aEntrar.cá .cv-bloco,.aEntrar.cá .caminhos a{
   opacity:1; transform:none;
   transition:opacity .55s var(--suave), transform .65s var(--suave);
   transition-delay:calc(var(--k, 0) * 45ms + .12s);

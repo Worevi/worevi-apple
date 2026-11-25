@@ -103,7 +103,7 @@
 
   /* numerar as linhas de cada camada, para entrarem uma a seguir à outra */
   function numerar(camada) {
-    var linhas = camada.querySelectorAll(".lista li, .ficha > *, .voltar, .caminhos a");
+    var linhas = camada.querySelectorAll(".lista li, .ficha > *, .cv-bloco, .voltar, .caminhos a");
     Array.prototype.forEach.call(linhas, function (l, k) {
       l.style.setProperty("--k", k);
     });
@@ -129,7 +129,7 @@
     reflow(para);
     para.classList.add("cá");
 
-    var n = para.querySelectorAll(".lista li, .ficha > *, .voltar, .caminhos a").length;
+    var n = para.querySelectorAll(".lista li, .ficha > *, .cv-bloco, .voltar, .caminhos a").length;
     var dura = ARRANQUE + n * PASSO + LINHA;
 
     setTimeout(function () {
@@ -180,10 +180,11 @@
 
 /* =====================================================================
    AS FOTOS A INCLINAR COM O RATO
-   Semi-3D: a foto roda até 14° a acompanhar o rato, e uma luz branca
-   anda por cima dela no sítio do cursor. A zona que reage é a ficha
-   inteira (foto e texto), para a foto já estar a virar-se quando o
-   rato se aproxima. Ao sair, volta devagar ao lugar.
+   Semi-3D: a foto roda até 14° a acompanhar o rato, com a sombra a
+   crescer. A zona que reage é a ficha inteira (foto e texto), para a
+   foto já estar a virar-se quando o rato se aproxima. Ao sair, volta
+   devagar ao lugar. (Havia aqui uma luz a andar por cima da foto; o
+   Gui achou que não fazia falta e saiu — ver estilo.css.)
    ===================================================================== */
 (function () {
   "use strict";
