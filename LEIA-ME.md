@@ -133,6 +133,13 @@ passa a portefólio a sério. Cada perfil ganhou:
 
 - **Especialidades** — quatro etiquetas (pílulas cinzentas) com o que
   a pessoa faz. Provisórias, inventadas a partir do papel de cada um.
+  Cada uma leva um pequeno ícone, ideia do Gui: um conjunto de 18
+  símbolos de traço fino, desenhados à mão (`ICONES` em `app.js`),
+  ligados à etiqueta por significado numa tabela (`MAPA`) — máquina
+  fotográfica para "Produto", casa para "Interiores", sol para "Luz
+  natural", e por aí fora. Ligados por JavaScript e não escritos no
+  HTML de cada perfil: só há um sítio a mudar se uma etiqueta passar
+  a usar outro ícone.
 - **Trabalhos** — uma grelha de três fotos quadradas, cortadas de
   `13-worevi/media` e guardadas em `media/portfolio/<pessoa>-N.webp`.
   A atribuição de cada trabalho à pessoa certa é um palpite meu (o
