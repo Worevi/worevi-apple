@@ -35,6 +35,26 @@
 *{box-sizing:border-box}
 html{font-optical-sizing:auto}
 
+/* ---------------------------------------------------------------
+   O CURSOR — uma seta fina, à Apple, em vez da seta grossa do
+   Windows/Chrome. É um SVG desenhado à mão, com a ponta no sítio
+   certo (o "2 2" depois do url() diz ao browser onde fica a ponta
+   que aponta, para o clique acontecer no pixel certo).
+
+   O "*{cursor:inherit}" é o que faz isto valer em todo o lado: por
+   omissão, o browser dá cursor:pointer (a mãozinha) a qualquer <a>
+   com href, por mais que o body diga outra coisa — é uma regra da
+   folha de estilo do próprio browser, mais forte que a herança.
+   Fazendo todos os elementos herdar do body, essa regra deixa de
+   entrar: o cursor fica o mesmo desenho em todo o site, ligações
+   incluídas. --------------------------------------------------- */
+
+:root{
+  --cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='28' viewBox='0 0 26 28'><path d='M3 2 L3 20.5 L7.8 16.2 L11.3 24 L14.7 22.5 L11.1 14.7 L17.8 14.7 Z' fill='%231d1d1f' stroke='white' stroke-width='1.4' stroke-linejoin='round'/></svg>") 3 2, auto;
+}
+html{cursor:var(--cursor)}
+*,*::before,*::after{cursor:inherit}
+
 body{
   margin:0;
   min-height:100svh;

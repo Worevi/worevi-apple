@@ -16,12 +16,15 @@
 
 <header class="topo">
   <!-- o logo, em vetor, a preto: o traço é o mesmo do 13-worevi/logo.svg,
-       só que com fill="currentColor" em vez do dourado -->
-  <a class="marca" href="#" aria-label="Worevi">
+       só que com fill="currentColor" em vez do dourado.
+       NÃO é um link: era <a href="#">, por isso clicar nele saltava
+       para o início e o cursor mudava para a mão. O Gui não queria
+       nenhuma das duas coisas — passou a <div>, simples decoração. -->
+  <div class="marca" role="img" aria-label="Worevi">
     <svg viewBox="-1 -1 138.5 37" width="92" height="25" fill="currentColor" aria-hidden="true">
       <path d="M0 0 L29 0 L44.5 21 L68.5 8 L115 14.8 L111.5 25.6 L69 19.5 L41 34.5 L23.5 10.5 L6 10.5 Z M119 15.3 L132 17.2 L136.3 29.2 L115.5 26.1 Z"/>
     </svg>
-  </a>
+  </div>
 </header>
 
 <main class="ecra" id="inicio">

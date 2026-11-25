@@ -126,6 +126,21 @@ vai dentro de cada uma decide-se a seguir.
 
 Os seguintes decidem-se um a um.
 
+## O logo e o cursor
+
+O logo deixou de ser um link: era `<a href="#">`, por isso um clique
+saltava para o início e o cursor mudava para a mãozinha — nenhuma das
+duas coisas devia acontecer, pediu o Gui. Passou a `<div>`, decoração
+pura, sem `href` e fora do alcance do `app.js` (que só ouve cliques em
+`a[href^='#']`).
+
+O cursor em todo o site passou a ser uma seta fina desenhada à mão
+(`--cursor`, no `:root`), mais próxima da seta do macOS do que da seta
+grossa por omissão do Windows/Chrome. Para valer também nas ligações —
+o browser dá `cursor:pointer` (a mão) a qualquer `<a>` com `href`, mais
+forte do que a herança normal — usa-se `*{cursor:inherit}`, que é uma
+regra do autor e por isso ganha à folha de estilo do próprio browser.
+
 ## Cores da Apple, para não inventar
 
 - preto dos títulos: `#1d1d1f` (não é `#000`)
