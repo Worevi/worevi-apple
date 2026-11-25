@@ -155,6 +155,19 @@ passa a portefólio a sério. Cada perfil ganhou:
   nesse projeto), por isso ficaram também com o monograma, como
   aproximação. **Se o Gui tiver os ficheiros oficiais destes três**
   (do site de imprensa de cada marca), é só mandar que se troca.
+
+  **Atualização:** o Gui mandou o link de um ficheiro Figma da
+  comunidade com o conjunto de ícones da Adobe 2022
+  (figma.com/design/8wjA7n…). Fui lá ver — confirma exatamente o que
+  já estava aqui: são quadrados lisos (sem degradê) com duas letras,
+  não o logótipo todo desenhado. Acertei as cores pelo que vi lá:
+  Photoshop fundo `#001E36` letra `#31A8FF`, Lightroom fundo `#31A8FF`
+  letra branca, Illustrator fundo `#330000` letra `#FF9A00`, Premiere
+  Pro e After Effects partilham o mesmo fundo `#00005B` com letra
+  `#9999FF` (é a cor de família dos apps de vídeo/áudio da Adobe,
+  via-se os dois lado a lado no ficheiro). Lidas a olho no ecrã, não
+  copiadas de um ficheiro de cores oficial — podem estar um tom ao
+  lado, mas é a mesma família.
 - **Trabalhos** — uma grelha de três fotos quadradas, cortadas de
   `13-worevi/media` e guardadas em `media/portfolio/<pessoa>-N.webp`.
   A atribuição de cada trabalho à pessoa certa é um palpite meu (o
