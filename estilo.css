@@ -112,17 +112,30 @@ a{color:inherit; text-decoration:none}
 /* As quatro palavras do início têm cada uma a sua cor viva — as cores
    de sistema da Apple — e ao passar o rato vão do preto para a cor,
    com um brilho na mesma cor por trás. Ideia do Gui. */
-.caminhos a:nth-child(1){--cor:#0a84ff; --brilho:rgba(10,132,255,.55)}   /* azul */
-.caminhos a:nth-child(2){--cor:#ff375f; --brilho:rgba(255,55,95,.5)}     /* rosa */
-.caminhos a:nth-child(3){--cor:#30d158; --brilho:rgba(48,209,88,.5)}     /* verde */
-.caminhos a:nth-child(4){--cor:#ff9f0a; --brilho:rgba(255,159,10,.55)}   /* laranja */
+.caminhos a:nth-child(1){--cor:#0a84ff; --brilho:rgba(10,132,255,.22)}   /* azul */
+.caminhos a:nth-child(2){--cor:#ff375f; --brilho:rgba(255,55,95,.2)}     /* rosa */
+.caminhos a:nth-child(3){--cor:#30d158; --brilho:rgba(48,209,88,.2)}     /* verde */
+.caminhos a:nth-child(4){--cor:#ff9f0a; --brilho:rgba(255,159,10,.22)}   /* laranja */
 .caminhos a{
-  transition:color .35s ease, text-shadow .45s ease;
-  text-shadow:0 0 0 rgba(0,0,0,0);
+  /* as DUAS sombras já existem em repouso, só que a 0px e transparentes.
+     Isto é o que importa: o browser só sabe misturar suavemente duas
+     listas de sombra quando têm o MESMO número de camadas. Antes havia
+     zero sombras em repouso e duas no hover — o browser não tinha o
+     que misturar, e saltava direto para o brilho cheio. Agora as duas
+     camadas crescem de 0 até ao brilho final, e dá para ver o preto a
+     esvair-se e a cor a nascer devagar, não a aparecer de repente. */
+  text-shadow:0 0 0px rgba(0,0,0,0), 0 0 0px rgba(0,0,0,0);
+  transition:color .6s cubic-bezier(.3,0,.1,1),
+             text-shadow .7s cubic-bezier(.3,0,.1,1);
 }
 .caminhos a:hover,.caminhos a:focus-visible{
   color:var(--cor);
-  text-shadow:0 0 18px var(--brilho), 0 0 42px var(--brilho);
+  /* o Gui achou o brilho exagerado, "radioativo": a opacidade desceu
+     bastante (acima) e o alcance encolheu — agora é uma luz pequena e
+     discreta atrás da letra, não um néon. */
+  text-shadow:0 0 6px var(--brilho), 0 0 14px var(--brilho);
+  transition:color .45s cubic-bezier(.4,0,.2,1) .03s,
+             text-shadow .6s cubic-bezier(.4,0,.2,1) .03s;
 }
 
 /* as outras três esbatem, para a que está debaixo do rato ficar só */

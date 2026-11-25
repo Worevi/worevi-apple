@@ -95,7 +95,19 @@ O ficheiro original tem 5,9 MB e 14 826 glifos. Foi reduzido ao latim
    o rato, cada uma vai do preto para a sua cor viva, com um brilho na
    mesma cor por trás. São as cores de sistema da Apple: Trabalhos
    azul `#0a84ff`, Serviços rosa `#ff375f`, Equipa verde `#30d158`,
-   Contacto laranja `#ff9f0a`. A onda de peso continua por cima. A zona que reage é a ficha inteira,
+   Contacto laranja `#ff9f0a`. A onda de peso continua por cima.
+
+   Duas correções a este brilho:
+   - **A transição saltava direto para a cor**, sem passar por estados
+     intermédios: em repouso não havia nenhuma `text-shadow`, e no
+     hover havia duas camadas — o browser só sabe misturar suavemente
+     duas listas de sombra quando têm o MESMO número de camadas.
+     Correção: as duas camadas já existem em repouso, só que a 0px e
+     transparentes, e crescem até ao brilho final.
+   - **O brilho estava exagerado** ("radioativo"), o Gui pediu mais
+     discreto: desceu a opacidade da cor (de ~0,5 para ~0,2) e o
+     alcance do desfoque (de 18–46px para 6–14px). Agora é uma luz
+     pequena atrás da letra, não um néon. A zona que reage é a ficha inteira,
    para a foto já se virar quando o rato se aproxima. A flutuação
    fica no embrulho `.flutua` e a inclinação na própria foto: são dois
    `transform` e não podem viver no mesmo elemento. Desligado em
