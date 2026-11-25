@@ -140,6 +140,21 @@ passa a portefólio a sério. Cada perfil ganhou:
   natural", e por aí fora. Ligados por JavaScript e não escritos no
   HTML de cada perfil: só há um sítio a mudar se uma etiqueta passar
   a usar outro ícone.
+- **Ferramentas** — os apps que cada pessoa usa. Cinco têm o logótipo
+  verdadeiro (Notion, Trello, DaVinci Resolve, DJI, Google Agenda),
+  vindo do [Simple Icons](https://simpleicons.org), um projeto de
+  código aberto (CC0) feito exatamente para isto — mostrar que
+  ferramentas uma pessoa ou um projeto usa, com o desenho oficial de
+  cada marca. O Photoshop, o Illustrator, o Premiere Pro, o After
+  Effects e o Lightroom ficaram com o monograma a cores (quadrado
+  arredondado + "Ps", "Ae", etc.) — não por preguiça: **é mesmo assim
+  que o ícone oficial de cada um deles é**, a Adobe desenha as apps
+  dela desse jeito. Já o Canva, o CapCut e o Capture One não existem
+  no Simple Icons (tentei três caminhos diferentes, todos a dar 404 —
+  parece que foram pedidos para sair, coisa que já aconteceu a marcas
+  nesse projeto), por isso ficaram também com o monograma, como
+  aproximação. **Se o Gui tiver os ficheiros oficiais destes três**
+  (do site de imprensa de cada marca), é só mandar que se troca.
 - **Trabalhos** — uma grelha de três fotos quadradas, cortadas de
   `13-worevi/media` e guardadas em `media/portfolio/<pessoa>-N.webp`.
   A atribuição de cada trabalho à pessoa certa é um palpite meu (o
@@ -162,6 +177,18 @@ perfis ficavam todos a mostrar-se ao mesmo tempo, sobrepostos uns aos
 outros. Via-se texto e fotos de pessoas diferentes misturados. Corrigido
 com `.pagina.perfil[hidden]{display:none}`, que tem mais uma classe na
 conta e garante que esconder continua a esconder.
+
+## O perfil fica sempre centrado
+
+Pedido do Gui: as informações do perfil estavam sempre encostadas ao
+topo, mesmo quando havia espaço de sobra por baixo. Era um resto de ter
+feito a página deslizar (`display:block`, sem a centragem que o resto
+do site tem). Corrigido com `justify-content:safe center`: quando o
+conteúdo cabe no ecrã, centra-se como em qualquer outra página; só
+quando é mesmo mais alto do que o ecrã é que começa no topo e deixa
+fazer scroll — porque centrar à força um conteúdo mais alto do que a
+janela escondia o topo dele atrás da borda, impossível de alcançar a
+fazer scroll.
 
 ## O logo e o cursor
 

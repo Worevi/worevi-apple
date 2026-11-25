@@ -296,9 +296,21 @@ a{color:inherit; text-decoration:none}
    --------------------------------------------------------------- */
 
 .pagina.perfil{
-  display:block; overflow-y:auto; -webkit-overflow-scrolling:touch;
-  padding:92px 20px 110px;
+  /* Quando o conteúdo cabe no ecrã, fica centrado como o resto do
+     site — era essa a queixa do Gui, isto ficava sempre encostado ao
+     topo. Só quando é mesmo mais alto do que o ecrã é que começa no
+     topo e deixa fazer scroll (justify-content:safe center faz
+     exatamente isso: centra se couber, mas nunca esconde o topo do
+     conteúdo por trás da borda do ecrã). A segunda linha substitui a
+     primeira nos browsers que percebem "safe"; a primeira é só para
+     os que não percebem não ficarem sem nenhum valor. */
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center;
+  justify-content:safe center;
+  overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:92px 20px 48px;
 }
+.perfil .miolo.cv{width:100%}
 /* BUG que já apanhou: `.pagina.perfil{display:block}` tem a mesma
    especificidade que `.pagina[hidden]{display:none}` (duas classes),
    e por vir depois no ficheiro ganhava — os oito perfis escondidos
@@ -329,17 +341,43 @@ a{color:inherit; text-decoration:none}
   text-transform:uppercase; color:var(--cinza);
 }
 
-.tags{display:flex; flex-wrap:wrap; gap:10px}
+.tags{display:flex; flex-wrap:wrap; gap:10px; padding:4px 0}
 .tag{
   display:inline-flex; align-items:center; gap:7px;
   padding:9px 16px 9px 13px; border-radius:999px;
   background:#f5f5f7; color:var(--preto);
   font-size:15px; font-weight:500; letter-spacing:-.01em;
+  /* a mola do dock: um bocadinho de "overshoot" (vai além do 1.1 e
+     volta), para parecer elástico em vez de só crescer */
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),
+             box-shadow .35s ease, background-color .25s ease;
 }
+/* ao passar o rato — a mesma sensação de um ícone no dock do macOS:
+   aumenta e ganha sombra, mas SEM LEVANTAR: o Gui quer tudo sempre
+   centrado, nada a subir nem a descer. É a escala sozinha, a crescer
+   a partir do centro da etiqueta (transform-origin:center, que é o
+   que já vem por omissão), que dá o "pop" sem mexer no sítio. */
+.tag:hover{
+  transform:scale(1.1);
+  background:#ececef;
+  box-shadow:0 10px 20px -8px rgba(0,0,0,.2);
+}
+.tag:hover .tag-icone{color:var(--preto)}
+
 /* o ícone, ligado por JS (ver app.js): traço fino, cor mais calma do
    que o texto, do mesmo jeito que o iOS pinta os símbolos ao lado de
    cada linha das Definições */
-.tag-icone{width:16px; height:16px; flex:none; color:var(--cinza)}
+.tag-icone{
+  width:16px; height:16px; flex:none; color:var(--cinza);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1), color .25s ease;
+}
+.tag:hover .tag-icone{transform:scale(1.18) rotate(-6deg)}
+
+@media (prefers-reduced-motion:reduce){
+  .tag,.tag-icone{transition:none}
+  .tag:hover{transform:none}
+  .tag:hover .tag-icone{transform:none}
+}
 
 .obras{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,2vw,16px)}
 .obra{margin:0; border-radius:18px; overflow:hidden; aspect-ratio:1}
@@ -347,6 +385,53 @@ a{color:inherit; text-decoration:none}
 
 @media (max-width:560px){
   .obras{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------------------------------------------------------------
+   AS FERRAMENTAS — ícones de apps a sério
+   Pedido do Gui: depois das especialidades (o que a pessoa sabe
+   fazer), as ferramentas com que faz — Lightroom, Premiere, Canva...
+   como os ícones verdadeiros dessas apps: um quadrado de cantos
+   arredondados, a cor da marca, com o monograma dela lá dentro — a
+   mesma linguagem do Launchpad e do dock do macOS. Não é o logótipo
+   oficial pixel a pixel (seria copiar a marca de outra empresa para
+   aqui); é o mesmo desenho que qualquer CV ou portefólio usa para
+   dizer "uso isto": a cor certa, as duas letras certas.
+   --------------------------------------------------------------- */
+
+.apps{display:flex; flex-wrap:wrap; gap:20px}
+.app{
+  display:flex; flex-direction:column; align-items:center; gap:9px;
+  width:64px; text-align:center;
+}
+.app-icone{
+  width:54px; height:54px; border-radius:13px;
+  display:grid; place-items:center;
+  color:#fff; font-size:16px; font-weight:700; letter-spacing:-.02em;
+  box-shadow:0 8px 18px -8px rgba(0,0,0,.35);
+  background:linear-gradient(135deg,var(--a),var(--b));
+  /* o mesmo "pop" das especialidades, só com a escala — nada sobe
+     nem desce, como o Gui pediu */
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.app:hover .app-icone{
+  transform:scale(1.12);
+  box-shadow:0 14px 26px -8px rgba(0,0,0,.42);
+}
+.app-nome{font-size:12.5px; color:var(--cinza); line-height:1.25}
+
+/* os cinco com logótipo verdadeiro (ligado por app.js): fundo claro
+   em vez do degradê, como o ícone real da app costuma vir — a marca
+   é que dá a cor, não nós */
+.app-icone.app-icone-real{
+  background:#fafafa; border:1px solid #ececef;
+  box-shadow:0 6px 14px -8px rgba(0,0,0,.18);
+}
+.app:hover .app-icone-real{box-shadow:0 10px 20px -8px rgba(0,0,0,.24)}
+
+@media (prefers-reduced-motion:reduce){
+  .app-icone{transition:none}
+  .app:hover .app-icone{transform:none}
 }
 
 .lista{
