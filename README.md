@@ -2,13 +2,6 @@
 
 <img src=".github/banner.svg" alt="Worevi · Apple — site minimalista, estilo Apple, feito do zero" width="100%">
 
-<br>
-
-<img src="https://img.shields.io/badge/HTML-e%20CSS-1d1d1f?logo=html5&logoColor=E34F26" alt="HTML e CSS">
-<img src="https://img.shields.io/badge/depend%C3%AAncias-0-1d1d1f?labelColor=1d1d1f&color=f2b92a" alt="dependências 0">
-<img src="https://img.shields.io/badge/tipografia-vari%C3%A1vel-1d1d1f?labelColor=1d1d1f&color=f2b92a" alt="tipografia variável">
-
-
 </div>
 
 <br>
