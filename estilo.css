@@ -457,6 +457,15 @@ a{color:inherit; text-decoration:none}
 }
 .app:hover .app-icone-real{box-shadow:0 10px 20px -8px rgba(0,0,0,.24)}
 
+/* os ícones a sério, exportados do Figma do Gui (SVG, exatos): já
+   trazem o quadrado de fundo deles desenhado lá dentro, por isso o
+   .app-icone fica só a moldura — sem cor, sem padding, a deixar o
+   SVG ocupar tudo. */
+.app-icone.app-icone-svg{background:none; padding:0}
+.app-icone.app-icone-svg img{
+  width:100%; height:100%; display:block; border-radius:13px;
+}
+
 @media (prefers-reduced-motion:reduce){
   .app-icone{transition:none}
   .app:hover .app-icone{transform:none}

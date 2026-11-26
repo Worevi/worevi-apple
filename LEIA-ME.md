@@ -171,18 +171,16 @@ passa a portefólio a sério. Cada perfil ganhou:
   aproximação. **Se o Gui tiver os ficheiros oficiais destes três**
   (do site de imprensa de cada marca), é só mandar que se troca.
 
-  **Atualização:** o Gui mandou o link de um ficheiro Figma da
-  comunidade com o conjunto de ícones da Adobe 2022
-  (figma.com/design/8wjA7n…). Fui lá ver — confirma exatamente o que
-  já estava aqui: são quadrados lisos (sem degradê) com duas letras,
-  não o logótipo todo desenhado. Acertei as cores pelo que vi lá:
-  Photoshop fundo `#001E36` letra `#31A8FF`, Lightroom fundo `#31A8FF`
-  letra branca, Illustrator fundo `#330000` letra `#FF9A00`, Premiere
-  Pro e After Effects partilham o mesmo fundo `#00005B` com letra
-  `#9999FF` (é a cor de família dos apps de vídeo/áudio da Adobe,
-  via-se os dois lado a lado no ficheiro). Lidas a olho no ecrã, não
-  copiadas de um ficheiro de cores oficial — podem estar um tom ao
-  lado, mas é a mesma família.
+  **Atualização — ícones exatos.** O Gui exportou do Figma (Export →
+  SVG) e mandou os ficheiros a sério: Photoshop, Illustrator, After
+  Effects, Lightroom, Lightroom Classic e Figma. Estão em
+  `media/apps/*.svg`, exatamente como saíram de lá — cada um já traz
+  o quadrado de fundo desenhado dentro do próprio SVG, por isso
+  `.app-icone-svg` não lhes põe cor nenhuma por cima, só a moldura. O
+  Premiere Pro continua por fazer (o Gui não mandou esse); fica com o
+  monograma de aproximação até chegar o ficheiro a sério. O Canva, o
+  CapCut e o Capture One continuam sem ícone verdadeiro — não existem
+  no conjunto do Figma que ele usou (é só da Adobe).
 - **Trabalhos, em pastas** — o Gui pediu para tirar as fotos: nada de
   imagem, uma pasta como as do Finder no macOS (ícone só em CSS, um
   SVG só, reaproveitado em todas), com o nome do projeto à frente. Do
