@@ -71,6 +71,21 @@ O ficheiro original tem 5,9 MB e 14 826 glifos. Foi reduzido ao latim
 
    Os textos das listas são provisórios, só para se ver o desenho.
 
+   **Ferramentas, atualizadas com dados a sério.** O Gui mandou
+   `avaliacao_equipa.pdf` (avaliação interna, com competências,
+   ferramentas, idiomas e objetivos de cada um). Usei a secção de
+   "Aplicações e ferramentas" para o **Pedro** (CapCut, Canva, After
+   Effects — em aprendizagem), o **Samuel** (CapCut, Lightroom,
+   Blackmagic, Final Cut Pro), o **Arthur** (DaVinci Resolve,
+   Illustrator, equipamento DJI) e o **Guilherme** (After Effects,
+   Lightroom, Lightroom Classic, Photoshop, Illustrator, Figma) — seis
+   ferramentas no caso dele, por isso as listas já não têm todas o
+   mesmo tamanho. A Natália, a Gabriele, o Patrick e a Victoria
+   continuam com as ferramentas provisórias de antes, por não estarem
+   no PDF. O resto do documento (competências avaliadas, idiomas,
+   objetivos, o ranking) ainda não entrou no site — só o que tocava
+   nas Ferramentas.
+
 4. **Os perfis da equipa** — cada nome da Equipa abre um perfil: a
    fotografia quadrada com cantos de 28 px, a flutuar (sobe e desce
    10 px em 6 s, com sombra suave por baixo), e a ficha ao lado — nome,
@@ -168,11 +183,15 @@ passa a portefólio a sério. Cada perfil ganhou:
   via-se os dois lado a lado no ficheiro). Lidas a olho no ecrã, não
   copiadas de um ficheiro de cores oficial — podem estar um tom ao
   lado, mas é a mesma família.
-- **Trabalhos** — uma grelha de três fotos quadradas, cortadas de
-  `13-worevi/media` e guardadas em `media/portfolio/<pessoa>-N.webp`.
-  A atribuição de cada trabalho à pessoa certa é um palpite meu (o
-  Samuel levou fotos de drone, o Arthur retratos e interiores, por
-  aí) — **o Gui tem de confirmar se é mesmo quem fez cada um**.
+- **Trabalhos, em pastas** — o Gui pediu para tirar as fotos: nada de
+  imagem, uma pasta como as do Finder no macOS (ícone só em CSS, um
+  SVG só, reaproveitado em todas), com o nome do projeto à frente. Do
+  **Pedro, Samuel, Arthur e Guilherme** são os nomes a sério, tirados
+  de `avaliacao_equipa.pdf` que ele mandou (Podcast Igor, Benjamin,
+  Diogo/Garage21, Evex, Thales, Antiga Padaria, JT, Limia Imobiliária,
+  JT Rasta…). Da Natália, da Gabriele, do Patrick e da Victoria
+  continuam provisórios, reaproveitados de nomes já usados no resto
+  do site, por não haver dados.
 
 Como isto já não cabe sempre num ecrã, **só a página de perfil
 desliza** (`overflow-y:auto`) — as outras (Trabalhos, Serviços, Equipa,
